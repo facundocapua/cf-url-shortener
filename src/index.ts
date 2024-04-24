@@ -1,15 +1,4 @@
-/**
- * Welcome to Cloudflare Workers! This is your first worker.
- *
- * - Run `npm run dev` in your terminal to start a development server
- * - Open a browser tab at http://localhost:8787/ to see your worker in action
- * - Run `npm run deploy` to publish your worker
- *
- * Bind resources to your worker in `wrangler.toml`. After adding bindings, a type definition for the
- * `Env` object can be regenerated with `npm run cf-typegen`.
- *
- * Learn more at https://developers.cloudflare.com/workers/
- */
+import qr from 'qrcode'
 
 const redirects: Record<string, string> = {
 	'/gracias': 'https://exabeauty.com.ar/'
@@ -19,8 +8,14 @@ const redirects: Record<string, string> = {
 export default {
 	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
 		const url = new URL(request.url)
-		const { pathname } = url
+		const { pathname, searchParams } = url
 		if (redirects[pathname]) {
+			if(searchParams.get('format') === 'qr'){
+				const image = await qr.toString(redirects[pathname])
+				const headers = { "Content-Type": "image/svg+xml" }
+				return new Response(image, { headers })
+			}
+
 			return Response.redirect(redirects[pathname], 301);
 		}
 
