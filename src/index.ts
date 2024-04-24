@@ -11,7 +11,7 @@ export default {
 		const { pathname, searchParams } = url
 		if (redirects[pathname]) {
 			if(searchParams.get('format') === 'qr'){
-				const image = await qr.toString(redirects[pathname])
+				const image = await qr.toString(redirects[pathname], { errorCorrectionLevel: 'H' })
 				const headers = { "Content-Type": "image/svg+xml" }
 				return new Response(image, { headers })
 			}
