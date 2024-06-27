@@ -1,7 +1,8 @@
 import qr from 'qrcode'
 
 const redirects: Record<string, string> = {
-	'/gracias': 'https://exabeauty.com.ar/'
+	'/gracias': 'https://exabeauty.com.ar/',
+	'/tarjeta': 'https://exabeauty.com.ar/vcard.vcf'
 }
 
 
