@@ -2,7 +2,8 @@ import qr from 'qrcode'
 
 const redirects: Record<string, string> = {
 	'/gracias': 'https://exabeauty.com.ar/',
-	'/tarjeta': 'https://exabeauty.com.ar/vcard.vcf'
+	'/tarjeta': 'https://exabeauty.com.ar/vcard.vcf',
+	'/lista-melody': 'https://cdn.exabeauty.com.ar/lista-melody.pdf'
 }
 
 
